@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { get_detail_character, Reset_detail } from "../../redux/action";
 function Detalle() {
@@ -8,7 +9,6 @@ function Detalle() {
   const detail = useSelector((state) => state.Detail);
   const { id } = useParams();
   console.log(id);
-
   useEffect(() => {
     dispatch(get_detail_character(id));
     return () => dispatch(Reset_detail);
@@ -21,15 +21,14 @@ function Detalle() {
           <h5 className="card-title">{detail.name}</h5>
           <p className="card-text">
             {detail.status === "Alive" ? (
-                        <div className="alert   alert-info" role="alert">
-  Status: {detail.status}
-</div>
+              <div className="alert   alert-info" role="alert">
+                Status: {detail.status}
+              </div>
             ) : (
               <div className="alert   alert-secondary" role="alert">
-  <strong>Status:  </strong> {detail.status}
-</div>
+                <strong>Status: </strong> {detail.status}
+              </div>
             )}
-
             <strong>Especie: </strong>
             {detail.species} <br></br> <strong>Status: </strong>
             {detail.status}
@@ -40,10 +39,12 @@ function Detalle() {
             <small className="text-muted">
               created: {new Date(detail.created).toLocaleString()}
             </small>
+            <Link to={"/"}>
+      <button type="button" class="btn btn-outline-primary">Back</button>
+      </Link>
           </p>
         </div>
       </div>
-
     </div>
   );
 }
