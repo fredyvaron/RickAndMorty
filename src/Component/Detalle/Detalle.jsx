@@ -39,10 +39,11 @@ function Detalle() {
             <small className="text-muted">
               created: {new Date(detail.created).toLocaleString()}
             </small>
-            <Link to={"/"}>
+         
+          </p>
+          <Link to={"/"}>
       <button type="button" class="btn btn-outline-primary">Back</button>
       </Link>
-          </p>
         </div>
       </div>
     </div>
