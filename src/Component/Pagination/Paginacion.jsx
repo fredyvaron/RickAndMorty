@@ -14,13 +14,13 @@ function Paginacion({handlenext, Handleprev, next, prev}) {
   <ul className="pagination justify-content-center">
 {prev? (
     <li className="page-item">
-    <a className="page-link" onClick={Handlepre}> Previus</a>
+    <a className="page-link" style={{cursor:"pointer"}} onClick={Handlepre}> Previus</a>
   </li>
 ): null}
 
     {next? (
     <li className="page-item">
-      <a  className="page-link"  onClick={handlenex}>Next</a>
+      <a  className="page-link" style={{cursor:"pointer"}}  onClick={handlenex}>Next</a>
   </li>
     ): null}
 
