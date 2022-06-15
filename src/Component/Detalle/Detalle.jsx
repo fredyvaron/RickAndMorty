@@ -65,7 +65,7 @@ function Detalle() {
               <div className="col-12 col-md-4 col-lg-3">
                 <div className="card border-dark mb-2" >
                   <div className="card-body text-dark">
-                    <h5 key={ep.id} className="card-title">{ep.name}</h5>
+                    <h5 key={ep.id} className="card-title">{ep.name.substring(0,20)}</h5>
                     <p className="card-text">
                      <strong>Al Aire</strong> {ep.air_date}
                      <br></br>
