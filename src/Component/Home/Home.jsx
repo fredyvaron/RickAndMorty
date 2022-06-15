@@ -136,7 +136,7 @@ function Home() {
       />
       <div className="row mt-4 mb-4">
         {characteres.map((character) => (
-          <div key={character.id} className="col-sm-3 border-info mb-3">
+          <div key={character.id} className="col-12 col-md-4 col-lg-3 border-info mb-3">
             <div className="card border-info">
               <img
                 src={character.image}

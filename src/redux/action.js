@@ -17,7 +17,15 @@ export const get_all_characters = (payload) => {
 export const get_detail_character = (payload) => {
     return async(dispatch) =>{
         const json = await axios.get(`https://rickandmortyapi.com/api/character/${payload}`);
-        dispatch({type: GET_DETAIL_CHARACTER, payload: json.data});
+        console.log(json.data);
+        let epi = [];
+        let a = await Promise.all(json.data.episode.map(x => axios(x)
+        .then((res) => res.data)
+        .then((res) => epi.push(res))
+        .catch(err => console.log(err)))
+      );
+        console.log(epi);
+        dispatch({type: GET_DETAIL_CHARACTER, payload: json.data , episod: epi});
     }
 }
 export const search_chacter= (character, filter) =>{
@@ -28,10 +36,10 @@ export const search_chacter= (character, filter) =>{
     }
 
 }
-export const Details_Episodes = () =>{
+export const Details_Episodes = (payload) =>{
     return async(dispatch)=>{
-        const json = await axios.get(`https://rickandmortyapi.com/api/episode/`);
-        console.log(json); 
+        const json = await axios.get(`https://rickandmortyapi.com/api/episode/${payload}`);
+        console.log(json.data); 
         dispatch({type: DETAILS_EPISODES, payload: json.data});
     }
 }

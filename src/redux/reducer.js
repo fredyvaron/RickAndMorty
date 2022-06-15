@@ -6,9 +6,10 @@ const initialState = {
     Info: [],
     Detail: {},
     Episodes: [],
+
 }
 
-const rootReducer = (state = initialState, { type, payload }) => {
+const rootReducer = (state = initialState, { type, payload, episod }) => {
 switch (type) {
     case GET_ALL_CHARACTERS:
         return{
@@ -19,9 +20,11 @@ switch (type) {
 
         }
     case GET_DETAIL_CHARACTER:
+        console.log({payload});
         return{
             ...state,
-            Detail: payload
+            Detail: payload,
+            Episodes: episod,
         }
     case SEARCH_CHARACTER:
         return{
@@ -32,7 +35,8 @@ switch (type) {
     case RESET_DETAIL:
         return{
             ...state,
-            Detail: payload
+            Detail: payload,
+            Episodes: payload,
         }
     case DETAILS_EPISODES:
         return{
