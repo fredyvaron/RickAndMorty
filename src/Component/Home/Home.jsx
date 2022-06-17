@@ -12,9 +12,11 @@ import 'sweetalert2/dist/sweetalert2.css'
 
 function Home() {
   const dispatch = useDispatch();
+ 
   const characteres = useSelector((state) => state.Characters);
   const error_search = useSelector((state) => state.Error);
   const info = useSelector((state) => state.Info);
+  const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({
     gender: "",
     species: "",
@@ -39,9 +41,11 @@ function Home() {
 
   };
   useEffect(() => {
+    setIsLoading(true)
     dispatch(
       get_all_characters("https://rickandmortyapi.com/api/character/?page=1")
     );
+    setIsLoading(false)
   }, [dispatch]);
   const handlenext = () => {
     get_chacteres(info.next);
@@ -155,25 +159,29 @@ function Home() {
         next={info.next}
         prev={info.prev}
       />
+{isLoading ? ( <p>Loading</p>): (
       <div className="row mt-4 mb-4">
-        {characteres.map((character) => (
-          <div key={character.id} className="col-12 col-md-4 col-lg-3 border-info mb-3">
-            <div className="card border-info">
-              <img
-                src={character.image}
-                className="card-img-top"
-                alt={character.name}
-              />
-              <div className="card-body">
-                <Link to={`/detalle/${character.id}`}>
-                  {" "}
-                  <p className="card-text">{character.name}</p>{" "}
-                </Link>
-              </div>
+      {characteres.map((character) => (
+        <div key={character.id} className="col-12 col-md-4 col-lg-3 border-info mb-3">
+          <div className="card border-info">
+            <img
+              src={character.image}
+              className="card-img-top"
+              alt={character.name}
+            />
+            <div className="card-body">
+              <Link to={`/detalle/${character.id}`}>
+                {" "}
+                <p className="card-text">{character.name}</p>{" "}
+              </Link>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
+) }
+
+
       <Paginacion
         handlenext={handlenext}
         Handleprev={Handleprev}

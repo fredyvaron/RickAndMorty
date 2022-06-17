@@ -19,7 +19,7 @@ function Detalle() {
     <div className="container">
 
     
-    <div className="container mt-5 " >
+    <div className="container mt-5 col-12 col-md-7 col-lg-4">
       <div className="card border-info mb-3 mx-auto">
         <img src={detail.image} style={{ height: "300px" }} alt="..." />
         <div className="card-body">
