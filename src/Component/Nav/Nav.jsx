@@ -51,7 +51,7 @@ function Nav() {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/"
+                  to="/about"
                   className="nav-link"
                   style={{ fontSize: "20px", fontWeight: "500" }}
                 >

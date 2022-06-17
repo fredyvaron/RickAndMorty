@@ -6,6 +6,8 @@ import Home from "./Component/Home/Home.jsx";
 import Nav from "./Component/Nav/Nav";
 import Detalle from "./Component/Detalle/Detalle";
 import Page from ".//Component/Search/Page";
+import About from "./Component/About/About";
+About
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/detalle/:id" element={<Detalle/>}/>
         <Route path="/search/" element={<Page/>} />
+        <Route path="/about" element={<About/>}/>
        
       </Routes>
   
