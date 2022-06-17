@@ -1,4 +1,4 @@
-import { DETAILS_EPISODES, FILTER_GENDER, FILTER_SPECIE, FILTER_STATUS, GET_ALL_CHARACTERS, GET_DETAIL_CHARACTER, RESET_DETAIL, SEARCH_CHARACTER } from "./action";
+import { DETAILS_EPISODES, FILTER_GENDER, FILTER_SPECIE, FILTER_STATUS, GET_ALL_CHARACTERS, GET_DETAIL_CHARACTER, RESET_DETAIL, SEARCH_CHARACTER, SEARCH_CHARACTER_NAME } from "./action";
 
 const initialState = {
     AllCharacters: [],
@@ -6,6 +6,7 @@ const initialState = {
     Info: [],
     Detail: {},
     Episodes: [],
+
 
 }
 
@@ -27,6 +28,12 @@ switch (type) {
             Episodes: episod,
         }
     case SEARCH_CHARACTER:
+        return{
+            ...state,
+            Characters: payload.results,
+            Info: payload.info,
+        }
+    case SEARCH_CHARACTER_NAME:
         return{
             ...state,
             Characters: payload.results,

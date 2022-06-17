@@ -2,20 +2,25 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Filter_Gender, Filter_Specie, Filter_Status, get_all_characters } from "../../redux/action";
+import {  get_all_characters} from "../../redux/action";
 import Paginacion from "../Pagination/Paginacion";
 import Search from "../Search/Search";
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.css'
+
 
 
 function Home() {
   const dispatch = useDispatch();
   const characteres = useSelector((state) => state.Characters);
+  const error_search = useSelector((state) => state.Error);
+  const info = useSelector((state) => state.Info);
   const [filter, setFilter] = useState({
     gender: "",
     species: "",
     status: ""
   });
-  const info = useSelector((state) => state.Info);
+ 
   let species = [
     "Human",
     "Alien",
@@ -51,18 +56,17 @@ function Home() {
       ...filter,
       status: e.target.value
     })
-    dispatch(Filter_Status(e.target.value))
+    // dispatch(Filter_Status(e.target.value))
 
 
   }
   const filterGender = (e)=>{
     e.preventDefault();
-    dispatch(Filter_Gender(e.target.value))
+    // dispatch(Filter_Gender(e.target.value))
     setFilter({
       ...filter,
       gender: e.target.value
     })
-    console.log(filter)
   }
 
   const filterSpecie = (e)=>{
@@ -71,17 +75,34 @@ function Home() {
       ...filter,
       species: e.target.value
     })
-    dispatch(Filter_Specie(e.target.value));
-
-
+    // dispatch(Filter_Specie(e.target.value))
   }
+  // const handleFilter = (e)=>{
+  //   e.preventDefault();
+  //   if(filter.status == "" && filter.species == "" && filter.gender == ""){
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: "you must select a filter",
+  //       icon: "error",
+  //       timer: 3000,
+  //       showConfirmButton: false,
+  //     });
+  //   }else{
+  //     dispatch(search_chacter_filter(filter))
+  //     setFilter({
+  //       gender: "",
+  //       species: "",
+  //       status: ""
+  //     })
+  //   }
+  // }
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-sm-3 mb-4">
           <label htmlFor="status">Status: </label>
           <select
-            class="form-select"
+            className="form-select"
             id="status"
             aria-label="Default select example"
             onClick={e=>filterStatus(e)}
@@ -95,7 +116,7 @@ function Home() {
         <div className="col-sm-3">
           <label htmlFor="status">Gender: </label>
           <select
-            class="form-select"
+            className="form-select"
             id="status"
             aria-label="Default select example"
             onClick={e=>filterGender(e)}
@@ -111,7 +132,7 @@ function Home() {
         <div className="col-sm-3">
           <label htmlFor="status">Specie: </label>
           <select
-            class="form-select"
+            className="form-select"
             id="status"
             aria-label="Default select example"
             onClick={e=>filterSpecie(e)}
@@ -127,7 +148,7 @@ function Home() {
           <Search input={filter}/>
         </div>
       </div>
-
+      
       <Paginacion
         handlenext={handlenext}
         Handleprev={Handleprev}

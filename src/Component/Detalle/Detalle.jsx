@@ -60,12 +60,12 @@ function Detalle() {
    
 
 
-          {episo &&
+          {episo?
             episo.map((ep) => (
               <div className="col-12 col-md-4 col-lg-3">
                 <div className="card border-dark mb-2" >
                   <div className="card-body text-dark">
-                    <h5 key={ep.id} className="card-title" style={{width: "230px",
+                    <h5 key={ep.id} className="card-title" style={{
       whiteSpace: "nowrap",
       textOverflow: "ellipsis",
       overflow: "hidden"}}>{ep.name}</h5>
@@ -77,7 +77,9 @@ function Detalle() {
                   </div>
                 </div>
               </div>
-            ))}
+            )):(
+              <h2 className="mt-4 mb-4">Not Found Episodes</h2>
+            )}
         </div>
       </div>
     </div>

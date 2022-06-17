@@ -18,7 +18,7 @@ function Search({input}) {
     <div>
 <label htmlFor="Search"></label>
 <form className="d-flex" id='Search' onSubmit={e=>handleSubmit(e)}>
-        <input className="form-control me-2" value={search} type="search" placeholder="Search" onChange={e=>handleChange(e)}/>
+        <input className="form-control me-2" value={search} type="search" placeholder="Search for Filter" onChange={e=>handleChange(e)}/>
         <button className="btn btn-primary" type="submit">Search</button>
       </form>
     </div>
