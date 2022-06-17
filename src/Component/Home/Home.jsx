@@ -107,7 +107,7 @@ function Home() {
             aria-label="Default select example"
             onClick={e=>filterStatus(e)}
           >
-            <option >Select One Status</option>
+            <option value="">Select One Status</option>
             <option value="alive">Alive</option>
             <option value="dead">Dead</option>
             <option value="unknown">Unknown</option>
@@ -121,7 +121,7 @@ function Home() {
             aria-label="Default select example"
             onClick={e=>filterGender(e)}
           >
-            <option>Select One Gender</option>
+            <option value="">Select One Gender</option>
             <option value="female">Female</option>
             <option value="male">Male</option>
             <option value="genderless">Genderless</option>
@@ -137,7 +137,7 @@ function Home() {
             aria-label="Default select example"
             onClick={e=>filterSpecie(e)}
           >
-            <option >Select One Specie</option>
+            <option value="">Select One Specie</option>
             {species.map((item, id) => (
               <option key={id} value={item}>{item}</option>
             ))}
