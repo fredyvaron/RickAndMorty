@@ -13,7 +13,7 @@ function Detalle() {
   console.log(id);
   useEffect(() => {
     dispatch(get_detail_character(id));
-    isLoading(false);
+    setIsLoading(false);
     return () => dispatch(Reset_detail);
   }, [dispatch]);
 
