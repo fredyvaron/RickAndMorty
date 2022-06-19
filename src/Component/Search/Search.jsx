@@ -8,7 +8,7 @@ function Search({input}) {
     const handleSubmit = (e)=>{
       e.preventDefault();
       dispatch(search_chacter(search, input))
-      setSearch('');
+      setSearch("");
     }
     const handleChange = (e)=>{
       e.preventDefault();

@@ -16,7 +16,7 @@ function Home() {
   const characteres = useSelector((state) => state.Characters);
   const error_search = useSelector((state) => state.Error);
   const info = useSelector((state) => state.Info);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState({
     gender: "",
     species: "",
@@ -41,7 +41,6 @@ function Home() {
 
   };
   useEffect(() => {
-    setIsLoading(true)
     dispatch(
       get_all_characters("https://rickandmortyapi.com/api/character/?page=1")
     );
@@ -81,25 +80,6 @@ function Home() {
     })
     // dispatch(Filter_Specie(e.target.value))
   }
-  // const handleFilter = (e)=>{
-  //   e.preventDefault();
-  //   if(filter.status == "" && filter.species == "" && filter.gender == ""){
-  //     Swal.fire({
-  //       title: "Error",
-  //       text: "you must select a filter",
-  //       icon: "error",
-  //       timer: 3000,
-  //       showConfirmButton: false,
-  //     });
-  //   }else{
-  //     dispatch(search_chacter_filter(filter))
-  //     setFilter({
-  //       gender: "",
-  //       species: "",
-  //       status: ""
-  //     })
-  //   }
-  // }
   return (
     <div className="container mt-4">
       <div className="row">
@@ -159,7 +139,7 @@ function Home() {
         next={info.next}
         prev={info.prev}
       />
-{isLoading ? ( <p>Loading</p>): (
+{isLoading ?( <p>Loading</p>): (
       <div className="row mt-4 mb-4">
       {characteres.map((character) => (
         <div key={character.id} className="col-12 col-md-4 col-lg-3 border-info mb-3">

@@ -59,7 +59,7 @@ function Nav() {
                 </Link>
               </li>
             </ul>
-            <form class="d-flex" onSubmit={(e) => handleSubmit(e)}>
+            <form className="d-flex" onSubmit={(e) => handleSubmit(e)}>
               <input
                 className="form-control me-2"
                 type="search"

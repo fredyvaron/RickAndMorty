@@ -8,17 +8,18 @@ function Detalle() {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.Detail);
   const episo = useSelector((state) => state.Episodes);
+ const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
     dispatch(get_detail_character(id));
+    isLoading(false);
     return () => dispatch(Reset_detail);
   }, [dispatch]);
 
   return (
     <div className="container">
-
-    
+    {isLoading ? () => <div>Loading...</div> : null}
     <div className="container mt-5 col-12 col-md-7 col-lg-4">
       <div className="card border-info mb-3 mx-auto">
         <img src={detail.image} style={{ height: "300px" }} alt="..." />
@@ -82,6 +83,7 @@ function Detalle() {
             )}
         </div>
       </div>
+
     </div>
 
   );
