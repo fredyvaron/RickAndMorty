@@ -7,7 +7,9 @@ import Paginacion from "../Pagination/Paginacion";
 import Search from "../Search/Search";
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
-
+import useBoolean from "../../hooks/useBoolean";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 function Home() {
@@ -16,7 +18,8 @@ function Home() {
   const characteres = useSelector((state) => state.Characters);
   const error_search = useSelector((state) => state.Error);
   const info = useSelector((state) => state.Info);
-  const [isLoading, setIsLoading] = useState(true);
+  const [cargando, setCargando] = useBoolean(false)
+  const [error, setError] = useBoolean(false)
   const [filter, setFilter] = useState({
     gender: "",
     species: "",
@@ -37,20 +40,28 @@ function Home() {
     "Planet",
   ];
   const get_chacteres = (url) => {
-    dispatch(get_all_characters(url));
+    setCargando.on()
+    dispatch(get_all_characters(url))
+    .then((response)=> response)
+    .catch((error)=> {  setError.on()})
+    .finally(()=> setCargando.off());
 
   };
   useEffect(() => {
+    setCargando.on()
     dispatch(
       get_all_characters("https://rickandmortyapi.com/api/character/?page=1")
-    );
-    setIsLoading(false)
+    ).then((response)=> response)
+    .catch((error)=> { setError.on()})
+    .finally(()=> setCargando.off())
+    
   }, [dispatch]);
   const handlenext = () => {
-    get_chacteres(info.next);
+    get_chacteres(info.next)
   };
   const Handleprev = () => {
-    get_chacteres(info.prev);
+    get_chacteres(info.prev)
+
   };
 
   const filterStatus = (e)=>{
@@ -139,7 +150,12 @@ function Home() {
         next={info.next}
         prev={info.prev}
       />
-{isLoading ?( <p>Loading</p>): (
+{error? ( <div><div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Error</h4>
+  <p>Hubo un error</p>
+</div></div>): null}
+{cargando ?( <div><Skeleton /> 
+<Skeleton count={5} /> </div>): (
       <div className="row mt-4 mb-4">
       {characteres.map((character) => (
         <div key={character.id} className="col-12 col-md-4 col-lg-3 border-info mb-3">

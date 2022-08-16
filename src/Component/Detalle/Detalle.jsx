@@ -3,24 +3,39 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import useBoolean from "../../hooks/useBoolean";
 import { get_detail_character, Reset_detail } from "../../redux/action";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 function Detalle() {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.Detail);
   const episo = useSelector((state) => state.Episodes);
- const [isLoading, setIsLoading] = useState(true);
+  const info = useSelector((state) => state.Info);
+  const [cargando, setCargando] = useBoolean(false)
+  const [error, setError] = useBoolean(false)
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
-    dispatch(get_detail_character(id));
-    setIsLoading(false);
+    setCargando.on()
+    dispatch(get_detail_character(id))
+    .then((response)=> response)
+    .catch((error)=> {  setError.on()})
+    .finally(()=> setCargando.off());
+    
     return () => dispatch(Reset_detail);
   }, [dispatch]);
 
   return (
     <div className="container">
-    {isLoading ? () => <div>Loading...</div> : null}
-    <div className="container mt-5 col-12 col-md-7 col-lg-4">
+      {error? ( <div><div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Error</h4>
+  <p>Hubo un error</p>
+</div></div>): null}
+    {cargando ? (<div className="container mt-5 col-12 col-md-7 col-lg-4"><Skeleton /> 
+<Skeleton count={7} /> </div> ) : (<div>
+  <div className="container mt-5 col-12 col-md-7 col-lg-4">
       <div className="card border-info mb-3 mx-auto">
         <img src={detail.image} style={{ height: "300px" }} alt="..." />
         <div className="card-body">
@@ -83,6 +98,8 @@ function Detalle() {
             )}
         </div>
       </div>
+</div>)}
+
 
     </div>
 
